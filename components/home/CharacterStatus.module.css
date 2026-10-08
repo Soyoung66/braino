@@ -1,0 +1,38 @@
+.wrap {
+  padding-top: 22px;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.name {
+  font-size: 32px;
+  line-height: 1;
+}
+.hearts {
+  display: flex;
+  gap: 2px;
+}
+.lv {
+  font-size: 23px;
+  line-height: 1;
+}
+.bar {
+  height: 12px;
+  margin-top: 12px;
+  border-radius: 6px;
+  background: var(--gray-light);
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  border-radius: 6px;
+  background: var(--green-bright);
+  transition: width 0.4s;
+}

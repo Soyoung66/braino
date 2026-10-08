@@ -1,0 +1,39 @@
+.hero {
+  position: relative;
+  height: 465px;
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 0;
+}
+.round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+.title {
+  font-size: 36px;
+  line-height: 1;
+}
+.char {
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  width: 180px;
+  height: 210px;
+  margin-left: -90px;
+  object-fit: contain;
+}
