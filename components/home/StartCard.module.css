@@ -1,0 +1,28 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 141px;
+  padding: 20px 16px 16px 17px;
+  border-radius: 20px;
+  background: var(--green-soft);
+  box-shadow: var(--shadow);
+  transition: transform 0.1s;
+}
+.card:active {
+  transform: scale(0.98);
+}
+.title {
+  font-size: 19px;
+  font-weight: 700;
+}
+.start {
+  margin-top: 6px;
+  font-size: 23px;
+  line-height: 1;
+}
+.left {
+  margin-top: auto;
+  align-self: flex-end;
+  color: #7a9a70;
+  font-size: 12px;
+}
