@@ -1,0 +1,18 @@
+.page {
+  min-height: 100dvh;
+  padding-bottom: 130px;
+  background: var(--white);
+}
+.head {
+  padding: 56px 31px 0;
+}
+.head h2 {
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.head p {
+  margin-top: 14px;
+  color: var(--gray);
+  font-size: 15px;
+}
