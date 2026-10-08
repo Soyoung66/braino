@@ -1,0 +1,18 @@
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 67px;
+  padding: 0 12px 0 18px;
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+  font-size: 15px;
+  font-weight: 700;
+}
+.icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  font-size: 11px;
+}
