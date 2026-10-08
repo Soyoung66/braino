@@ -3,8 +3,25 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { supabase } from '../lib/supabase'
 import styles from './login.module.css'
+
+const inputStyle: React.CSSProperties = {
+  width: '100%',
+  height: 60,
+  padding: '0 22px',
+  border: '1px solid #d4f7cb',
+  borderRadius: 20,
+  background: '#ebffe6',
+  fontSize: 17,
+  fontFamily: 'inherit',
+}
+
+const labelStyle: React.CSSProperties = {
+  display: 'block',
+  margin: '0 0 12px 4px',
+  fontSize: 16,
+  fontWeight: 600,
+}
 
 export default function LoginPage() {
   const router = useRouter()
@@ -12,9 +29,8 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [agree, setAgree] = useState(false)
   const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
@@ -23,75 +39,76 @@ export default function LoginPage() {
       return
     }
 
-    setLoading(true)
-    const { error: signInError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    setLoading(false)
-
-    if (signInError) {
-      setError('이메일 또는 비밀번호가 올바르지 않습니다.')
-      return
-    }
-
+    // 시연용: Supabase 로그인 생략
     router.push('/home')
   }
 
   return (
-    <form onSubmit={handleLogin} className={styles.page}>
-      <div className={styles.top}>
-        <h1 className={styles.logo}>BRAINO</h1>
-        <p className={styles.slogan}>하루 10분, AI 대신 내 뇌로 생각하기</p>
-      </div>
+    <main className={styles.page}>
+      <form onSubmit={handleLogin} className={styles.form}>
+        <div className={styles.head}>
+          <h1 className={styles.logo}>BRAINO</h1>
+          <p>하루 10분, AI 대신 내 뇌로 생각하기</p>
+        </div>
 
-      <div className={styles.fields}>
-        <label className={styles.label}>이메일</label>
+        <label style={labelStyle}>이메일</label>
         <input
-          className={styles.input}
+          style={inputStyle}
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
 
-        <label className={styles.label}>비밀번호</label>
+        <label className={styles.gap} style={labelStyle}>
+          비밀번호
+        </label>
         <input
-          className={styles.input}
+          style={inputStyle}
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
         />
 
-        <Link href="/forgot" className={styles.forgot}>
+        <button type="button" className={styles.forgot}>
           비밀번호를 잊으셨나요?
-        </Link>
-      </div>
-
-      <div className={styles.bottom}>
-        {error && <p className={styles.error}>{error}</p>}
-
-        <label className={styles.agree}>
-          <input
-            type="checkbox"
-            checked={agree}
-            onChange={(e) => setAgree(e.target.checked)}
-          />
-          <span className={styles.checkIcon} data-checked={agree}>
-            ✓
-          </span>
-          <span>개인정보 수집 및 이용에 동의합니다.</span>
-        </label>
-
-        <button className={styles.loginBtn} type="submit" disabled={loading}>
-          {loading ? '로그인 중...' : '로그인'}
         </button>
 
-        <Link href="/signup" className={styles.signup}>
-          회원가입
-        </Link>
-      </div>
-    </form>
+        <div className={styles.bottom}>
+          {error && <p className={styles.err}>{error}</p>}
+
+          <label className={styles.agree}>
+            <input
+              type="checkbox"
+              checked={agree}
+              onChange={(e) => setAgree(e.target.checked)}
+            />
+            <span className={styles.circle}>✓</span>
+            <span>개인정보 수집 및 이용에 동의합니다.</span>
+          </label>
+
+          <button
+            type="submit"
+            style={{
+              height: 60,
+              border: 'none',
+              borderRadius: 30,
+              background: '#35b511',
+              color: '#fff',
+              fontSize: 20,
+              fontFamily: 'inherit',
+              cursor: 'pointer',
+            }}
+          >
+            로그인
+          </button>
+
+          <Link href="/signup" className={styles.signup}>
+            회원가입
+          </Link>
+        </div>
+      </form>
+    </main>
   )
 }
