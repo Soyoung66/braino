@@ -1,0 +1,81 @@
+.page {
+  min-height: 100dvh;
+  background: var(--white);
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: 165px 20px 46px;
+}
+.head {
+  margin: 0 0 66px 13px;
+}
+.logo {
+  font-size: 58px;
+  line-height: 1;
+}
+.head p {
+  margin-top: 18px;
+  font-size: 15px;
+}
+.gap {
+  margin-top: 26px;
+}
+.forgot {
+  align-self: flex-end;
+  margin-top: 22px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--gray);
+  font-size: 14px;
+  cursor: pointer;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  padding-top: 40px;
+}
+.agree {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 22px 6px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.agree input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25px;
+  height: 25px;
+  border: 2px solid #cfcfcf;
+  border-radius: 50%;
+  color: #cfcfcf;
+}
+.agree input:checked + .circle {
+  border-color: var(--green);
+  background: var(--green);
+  color: var(--white);
+}
+.err {
+  margin: -8px 0 14px 6px;
+  color: var(--red);
+  font-size: 13px;
+}
+.signup {
+  align-self: center;
+  margin-top: 22px;
+  padding: 4px 10px;
+  color: var(--gray);
+  font-size: 15px;
+}

@@ -1,0 +1,63 @@
+.nav {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 20;
+  width: 100%;
+  max-width: var(--app-width);
+  height: 104px;
+  transform: translateX(-50%);
+  overflow: hidden;
+  pointer-events: none;
+}
+.bar {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  padding: 0 40px;
+  border-radius: 32px;
+  background: var(--white);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  pointer-events: auto;
+}
+.side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+}
+.icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  font-size: 13px;
+}
+.home {
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 144px;
+  height: 144px;
+  margin-left: -72px;
+  padding-top: 10px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  color: var(--white);
+  font-size: 20px;
+}
+.homeIcon {
+  width: 52px;
+  height: 46px;
+  margin-bottom: 4px;
+  object-fit: contain;
+  font-size: 15px;
+}

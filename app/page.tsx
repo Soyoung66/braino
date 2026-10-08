@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { supabase } from '../lib/supabase'
 import styles from './login.module.css'
 
 export default function LoginPage() {
@@ -11,8 +12,9 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [agree, setAgree] = useState(false)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
 
@@ -21,7 +23,18 @@ export default function LoginPage() {
       return
     }
 
-    // 시연용: Supabase 로그인 생략하고 바로 이동
+    setLoading(true)
+    const { error: signInError } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    })
+    setLoading(false)
+
+    if (signInError) {
+      setError('이메일 또는 비밀번호가 올바르지 않습니다.')
+      return
+    }
+
     router.push('/home')
   }
 
@@ -71,8 +84,8 @@ export default function LoginPage() {
           <span>개인정보 수집 및 이용에 동의합니다.</span>
         </label>
 
-        <button className={styles.loginBtn} type="submit">
-          로그인
+        <button className={styles.loginBtn} type="submit" disabled={loading}>
+          {loading ? '로그인 중...' : '로그인'}
         </button>
 
         <Link href="/signup" className={styles.signup}>
