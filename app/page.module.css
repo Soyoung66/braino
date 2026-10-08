@@ -1,0 +1,29 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100dvh;
+  padding: 165px 20px 92px;
+  background: var(--cream);
+}
+.text {
+  text-align: center;
+}
+.text h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+.text p {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--gray);
+}
+.egg {
+  width: 230px;
+  height: 230px;
+  object-fit: contain;
+  margin: auto 0;
+}
+.bottom {
+  width: 100%;
+}
