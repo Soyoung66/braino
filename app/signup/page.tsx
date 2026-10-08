@@ -12,10 +12,9 @@ export default function Signup() {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const [email, setEmail] = useState('')
-  const [code, setCode] = useState('')
 
   const [idChecked, setIdChecked] = useState(false)
-  const [codeSent, setCodeSent] = useState(false)
+  const [sent, setSent] = useState(false)
   const [msg, setMsg] = useState({ text: '', type: '' })
   const [loading, setLoading] = useState(false)
 
@@ -36,7 +35,8 @@ export default function Signup() {
     }
   }
 
-  const sendCode = async () => {
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
     if (!name.trim()) return showMsg('이름을 입력하세요.')
     if (!idChecked) return showMsg('아이디 중복확인을 해주세요.')
     if (password.length < 6) return showMsg('비밀번호는 6자 이상이어야 합니다.')
@@ -47,48 +47,31 @@ export default function Signup() {
     const { error } = await supabase.auth.signUp({
       email,
       password,
-      options: { data: { name, username } },
+      options: {
+        data: { name, username },
+        emailRedirectTo: window.location.origin,
+      },
     })
     setLoading(false)
 
     if (error) return showMsg(error.message)
-    setCodeSent(true)
-    showMsg('인증코드를 이메일로 보냈습니다.', 'success')
+    setSent(true)
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!codeSent) return showMsg('이메일 인증코드를 먼저 전송해주세요.')
-    if (!code.trim()) return showMsg('인증코드를 입력하세요.')
-
-    setLoading(true)
-    const { data, error } = await supabase.auth.verifyOtp({
-      email,
-      token: code,
-      type: 'email',
-    })
-
-    if (error || !data.user) {
-      setLoading(false)
-      return showMsg('인증코드가 올바르지 않습니다.')
-    }
-
-    const { error: profileError } = await supabase.from('profiles').insert({
-      id: data.user.id,
-      username,
-      name,
-      email,
-    })
-
-    if (profileError) {
-      setLoading(false)
-      return showMsg('프로필 저장 중 오류가 발생했습니다.')
-    }
-
-    await supabase.auth.signOut()
-    setLoading(false)
-    alert('회원가입이 완료되었습니다!')
-    router.push('/')
+  if (sent) {
+    return (
+      <div className="center">
+        <h2>메일을 확인해주세요</h2>
+        <p className="sub">
+          {email}로 인증 링크를 보냈어요.
+          <br />
+          링크를 누르면 회원가입이 완료돼요.
+        </p>
+        <button className="btn primary" onClick={() => router.push('/')}>
+          처음 화면으로
+        </button>
+      </div>
+    )
   }
 
   return (
@@ -139,32 +122,13 @@ export default function Signup() {
         <p className="msg error">비밀번호가 일치하지 않습니다.</p>
       )}
 
-      <div className="row">
-        <input
-          className="input"
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={codeSent}
-          required
-        />
-        <button
-          type="button"
-          className="btn small"
-          onClick={sendCode}
-          disabled={loading || codeSent}
-        >
-          {codeSent ? '전송됨' : '코드전송'}
-        </button>
-      </div>
-
       <input
         className="input"
-        placeholder="이메일 인증코드"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-        disabled={!codeSent}
+        type="email"
+        placeholder="이메일"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
       />
 
       {msg.text && <p className={`msg ${msg.type}`}>{msg.text}</p>}
