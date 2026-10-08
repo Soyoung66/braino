@@ -103,3 +103,12 @@ input {
 .b-input:focus {
   border-color: var(--green);
 }
+
+/* 2차 화면용 (카테고리, 미션, 마이페이지, 달력, 랭킹) - 위에꺼 건드리지 말고 맨 아래에 추가 */
+:root {
+  --green-neon: #6dff6d;
+  --green-pale: #defdd6;
+  --composer: #f3faf0;
+  --blue-pale: #eaf1ff;
+  --line-blue: #f8fbff;
+}
