@@ -1,23 +1,35 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { supabase } from '../../lib/supabase'
+// 홈은 부품 조립만 함. 이 파일은 리더만 수정!
+import { useHomeData } from '../../lib/useHomeData'
+import HomeHero from '../../components/home/HomeHero'
+import CharacterStatus from '../../components/home/CharacterStatus'
+import StreakCard from '../../components/home/StreakCard'
+import StartCard from '../../components/home/StartCard'
+import CalendarCard from '../../components/home/CalendarCard'
+import BottomNav from '../../components/BottomNav'
+import s from './home.module.css'
 
-export default function Home() {
-  const router = useRouter()
-
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
-    router.push('/')
-  }
+export default function HomePage() {
+  const d = useHomeData()
+  if (!d) return <main className={s.page} />
 
   return (
-    <div className="center">
-      <h2>홈 화면</h2>
-      <p className="sub">로그인 성공! 여기에 캐릭터 화면이 들어갑니다.</p>
-      <button className="btn" onClick={handleLogout}>
-        로그아웃
-      </button>
-    </div>
+    <main className={s.page}>
+      <HomeHero level={d.level} />
+      <div className={s.body}>
+        <CharacterStatus name={d.charName} hearts={d.hearts} level={d.level} xpRate={d.xpRate} />
+        <div className={s.grid}>
+          <div className={s.left}>
+            <StreakCard streak={d.streak} week={d.week} />
+          </div>
+          <div className={s.right}>
+            <StartCard left={d.left} />
+            <CalendarCard />
+          </div>
+        </div>
+      </div>
+      <BottomNav />
+    </main>
   )
 }

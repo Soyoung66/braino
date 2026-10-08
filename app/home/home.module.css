@@ -1,0 +1,25 @@
+.page {
+  min-height: 100dvh;
+  padding-bottom: 130px;
+  background: var(--white);
+}
+.body {
+  padding: 0 26px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+.left {
+  display: flex;
+}
+.left > * {
+  flex: 1;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

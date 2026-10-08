@@ -1,0 +1,105 @@
+/* 공통 디자인 값. 색, 폰트는 여기 변수만 쓰기! 바꾸고 싶으면 리더한테 말하기 */
+:root {
+  --green: #38b513;
+  --green-bright: #1fcc23;
+  --green-soft: #c3fcae;
+  --green-input: #edfde8;
+  --green-line: #dafad0;
+  --cream: #fbfaf3;
+  --white: #ffffff;
+  --text: #111111;
+  --gray: #8a8a8a;
+  --gray-light: #e3e3e3;
+  --red: #ff5b62;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  --font-base: 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --app-width: 402px;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  font-family: var(--font-base);
+  color: var(--text);
+  background: #ecece8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 폰 화면 크기 틀. pc에서 봐도 가운데 폰 크기로 나옴 */
+.app {
+  position: relative;
+  width: 100%;
+  max-width: var(--app-width);
+  min-height: 100dvh;
+  margin: 0 auto;
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font-family: inherit;
+}
+
+.pixel {
+  font-family: var(--font-pixel), monospace;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+}
+
+/* 초록 큰 버튼 (시작하기, 로그인, 제출하기 ...) */
+.b-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 60px;
+  border: none;
+  border-radius: 30px;
+  background: var(--green);
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.b-btn:active {
+  transform: scale(0.98);
+}
+.b-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* 입력칸 */
+.b-label {
+  display: block;
+  margin: 0 0 10px 13px;
+  font-size: 14px;
+  font-weight: 700;
+}
+.b-input {
+  display: block;
+  width: 100%;
+  height: 60px;
+  padding: 0 21px;
+  border: 1px solid var(--green-line);
+  border-radius: 20px;
+  background: var(--green-input);
+  color: var(--text);
+  font-size: 16px;
+  outline: none;
+}
+.b-input::placeholder {
+  color: #a9b8a4;
+}
+.b-input:focus {
+  border-color: var(--green);
+}
